@@ -5,8 +5,7 @@
   "main": "main.ts",
   "exports": "./main.ts",
   "scripts": {
-    "start": "deno run --allow-net --allow-env main.ts",
-    "dev": "deno run --allow-net --allow-env --watch main.ts",
+    "dev": "deno run --allow-net --allow-env --watch dev.ts",
     "test": "deno test --allow-net --allow-env"
   },
   "keywords": ["translation", "api", "deno", "serverless", "llm"],

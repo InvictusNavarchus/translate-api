@@ -1,15 +1,16 @@
 # Translation API
 
-A robust translation API built with Deno that leverages LLM-powered translation services. This API can automatically detect source languages and translate text between different languages using ISO 639-1 language codes.
+A robust serverless translation API built with Deno that leverages LLM-powered translation services. This API can automatically detect source languages and translate text between different languages using ISO 639-1 language codes.
 
 ## Features
 
+- **Serverless Architecture**: Designed for Deno Deploy serverless functions
 - **Auto Language Detection**: Automatically detects the source language if not specified
 - **ISO 639-1 Support**: Uses standard 2-letter language codes
 - **LLM-Powered Translation**: Leverages advanced language models for high-quality translations
 - **CORS Support**: Ready for cross-origin requests
 - **Error Handling**: Comprehensive error handling and validation
-- **Serverless Ready**: Optimized for Deno Deploy serverless deployment
+- **Fast Cold Starts**: Optimized for serverless deployment
 
 ## API Endpoint
 
@@ -120,18 +121,19 @@ curl -X POST "https://your-api-endpoint.deno.dev/" \
 
 ```bash
 # Start the development server with auto-reload
-deno run --allow-net --allow-env --watch main.ts
-
-# Or use the npm script
 deno task dev
 ```
 
 The API will be available at `http://localhost:8000`
 
-### Running in Production
+### Serverless Function
 
-```bash
-deno run --allow-net --allow-env main.ts
+The main `main.ts` file exports a default handler function that's ready for serverless deployment:
+
+```typescript
+export default async function handler(req: Request): Promise<Response> {
+  // Translation logic here
+}
 ```
 
 ## Deployment to Deno Deploy
@@ -147,7 +149,8 @@ The API will be automatically deployed and available at your Deno Deploy URL.
 
 ```
 translate-api/
-├── main.ts                 # Main API handler
+├── main.ts                 # Serverless handler function
+├── dev.ts                  # Development server for local testing
 ├── services/
 │   ├── translator.ts       # Translation service using LLM
 │   └── language-detector.ts # Language detection service

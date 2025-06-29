@@ -1,14 +1,15 @@
-import { serve } from "https://deno.land/std@0.208.0/http/server.ts";
 import { getCorsHeaders } from "./utils/cors.ts";
 import { translateText } from "./services/translator.ts";
 import { detectLanguage } from "./services/language-detector.ts";
 import { validateLanguageCode } from "./utils/validation.ts";
 
 /**
- * Main handler for the translation API
+ * Serverless handler for the translation API
  * Handles CORS, validates parameters, and orchestrates translation
+ * @param req - The incoming HTTP request
+ * @returns Promise<Response> - The HTTP response
  */
-async function handler(req: Request): Promise<Response> {
+export default async function handler(req: Request): Promise<Response> {
   const corsHeaders = getCorsHeaders();
 
   // Handle CORS preflight
@@ -140,6 +141,3 @@ async function handler(req: Request): Promise<Response> {
     );
   }
 }
-
-// Start the server
-serve(handler, { port: 8000 });

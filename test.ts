@@ -1,6 +1,7 @@
 /**
- * Simple test script to verify API functionality
- * Run with: deno run --allow-net test.ts
+ * Simple test script to verify serverless API functionality
+ * Make sure to run the dev server first: deno task dev
+ * Then run: deno run --allow-net test.ts
  */
 
 const API_BASE_URL = "http://localhost:8000";
@@ -142,7 +143,8 @@ async function testCors(): Promise<void> {
  */
 async function runTests(): Promise<void> {
   console.log("🚀 Starting Translation API Tests");
-  console.log(`📍 Testing against: ${API_BASE_URL}`);
+  console.log("📍 Testing against: http://localhost:8000");
+  console.log("⚠️  Make sure to run 'deno task dev' first!");
   
   // Test CORS first
   await testCors();

@@ -1,6 +1,17 @@
-# Deno Deploy Configuration
+# Deno Deploy Serverless Configuration
 
-This API is designed to be deployed on Deno Deploy as a serverless function.
+This API is designed as a true serverless function for Deno Deploy.
+
+## Serverless Architecture
+
+The `main.ts` file exports a default handler function:
+```typescript
+export default async function handler(req: Request): Promise<Response> {
+  // Translation logic
+}
+```
+
+This is a pure serverless function with no persistent server - perfect for Deno Deploy's edge functions.
 
 ## Deployment Steps
 
