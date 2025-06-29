@@ -1,0 +1,15 @@
+{
+  "name": "translate-api",
+  "version": "0.1.0",
+  "description": "A robust translation API using Deno and LLM-powered translation",
+  "main": "main.ts",
+  "exports": "./main.ts",
+  "scripts": {
+    "start": "deno run --allow-net --allow-env main.ts",
+    "dev": "deno run --allow-net --allow-env --watch main.ts",
+    "test": "deno test --allow-net --allow-env"
+  },
+  "keywords": ["translation", "api", "deno", "serverless", "llm"],
+  "author": "Developer",
+  "license": "MPL-2.0"
+}
