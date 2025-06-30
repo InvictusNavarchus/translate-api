@@ -2,8 +2,8 @@
   "name": "translate-api",
   "version": "0.1.0",
   "description": "A robust translation API using Deno and LLM-powered translation",
-  "main": "main.ts",
-  "exports": "./main.ts",
+  "main": "main-single.ts",
+  "exports": "./main-single.ts",
   "scripts": {
     "dev": "deno run --allow-net --allow-env --watch dev.ts",
     "test": "deno test --allow-net --allow-env"

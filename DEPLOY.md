@@ -4,14 +4,14 @@ This API is designed as a true serverless function for Deno Deploy.
 
 ## Serverless Architecture
 
-The `main.ts` file exports a default handler function:
+The `main-single.ts` file exports a default handler function with all dependencies inline:
 ```typescript
 export default async function handler(req: Request): Promise<Response> {
-  // Translation logic
+  // Translation logic with all utilities included
 }
 ```
 
-This is a pure serverless function with no persistent server - perfect for Deno Deploy's edge functions.
+This single-file approach avoids import resolution issues that can cause `ISOLATE_INTERNAL_FAILURE` errors on Deno Deploy.
 
 ## Deployment Steps
 
@@ -21,22 +21,26 @@ This is a pure serverless function with no persistent server - perfect for Deno 
 
 2. **Configure Project**
    - Project Name: `translate-api`
-   - Entry Point: `main.ts`
+   - Entry Point: `main-single.ts` (important: use the single-file version)
    - Environment: Production
 
 3. **Deploy**
    - Deno Deploy will automatically build and deploy your API
    - The API will be available at: `https://your-project-name.deno.dev`
 
-## Environment Variables
+## File Structure
 
-No environment variables are required for basic functionality.
+- `main-single.ts` - Single-file serverless handler (use this for deployment)
+- `main.ts` - Modular version (may have import issues on Deno Deploy)
+- `dev.ts` - Development server for modular version
+- `dev-single.ts` - Development server for single-file version
 
-## Permissions
+## Troubleshooting
 
-The API requires the following permissions:
-- `--allow-net`: For making HTTP requests to the Copilot API
-- `--allow-env`: For reading environment variables (if needed in future)
+If you encounter `ISOLATE_INTERNAL_FAILURE`:
+1. Use `main-single.ts` as entry point (all dependencies inline)
+2. Ensure the handler function is exported as default
+3. Check that all external API calls use proper error handling
 
 ## Automatic Deployments
 

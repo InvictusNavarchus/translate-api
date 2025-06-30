@@ -9,7 +9,7 @@ import { validateLanguageCode } from "./utils/validation.ts";
  * @param req - The incoming HTTP request
  * @returns Promise<Response> - The HTTP response
  */
-export default async function handler(req: Request): Promise<Response> {
+async function handler(req: Request): Promise<Response> {
   const corsHeaders = getCorsHeaders();
 
   // Handle CORS preflight
@@ -141,3 +141,9 @@ export default async function handler(req: Request): Promise<Response> {
     );
   }
 }
+
+// Export the handler for Deno Deploy
+export default handler;
+
+// Also export as named export for compatibility
+export { handler };

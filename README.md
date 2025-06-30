@@ -120,7 +120,10 @@ curl -X POST "https://your-api-endpoint.deno.dev/" \
 ### Running Locally
 
 ```bash
-# Start the development server with auto-reload
+# Option 1: Single-file version (recommended for deployment testing)
+deno run --allow-net --allow-env dev-single.ts
+
+# Option 2: Modular version (for development)
 deno task dev
 ```
 
@@ -149,8 +152,10 @@ The API will be automatically deployed and available at your Deno Deploy URL.
 
 ```
 translate-api/
-├── main.ts                 # Serverless handler function
-├── dev.ts                  # Development server for local testing
+├── main-single.ts          # 🎯 Single-file serverless handler (recommended for Deno Deploy)
+├── main.ts                 # Modular serverless handler 
+├── dev-single.ts           # Development server for single-file version
+├── dev.ts                  # Development server for modular version
 ├── services/
 │   ├── translator.ts       # Translation service using LLM
 │   └── language-detector.ts # Language detection service
@@ -160,6 +165,20 @@ translate-api/
 ├── deno.json              # Deno configuration
 └── README.md              # This file
 ```
+
+## Deployment Versions
+
+### Single-file Version (Recommended)
+- **File**: `main-single.ts`
+- **Use case**: Deno Deploy deployment
+- **Pros**: No import issues, faster cold starts
+- **Cons**: Larger file size
+
+### Modular Version
+- **File**: `main.ts` 
+- **Use case**: Development and local testing
+- **Pros**: Better code organization, easier maintenance
+- **Cons**: May have import resolution issues on some serverless platforms
 
 ## Error Codes
 
